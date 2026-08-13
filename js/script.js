@@ -81,6 +81,7 @@ function matchRoute(path) {
 async function render() {
     const path = location.pathname;
     const result = matchRoute(path);
+    console.log(path,location.href)
     app.innerHTML = result ? await result.route.render(result.params) : notFound();
 
     document.querySelectorAll('nav a').forEach(link => {
