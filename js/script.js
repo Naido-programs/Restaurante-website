@@ -175,7 +175,7 @@ async function render() {
     document.querySelectorAll('nav a[data-route]').forEach(link => {
         const linkPath = link.getAttribute('href');
         console.log(">>",linkPath, path)
-        const isActive = (path === '/' && linkPath === '/') || 
+        const isActive = ((path === '/' || path.endsWith('/')) && linkPath === '/') || 
                           (path != '/' && linkPath != '/' && path.includes(linkPath)) ||
                           (path.endsWith('.html') && linkPath === path.replace('.html', ''));
         link.classList.toggle('border-sky-700', isActive);
