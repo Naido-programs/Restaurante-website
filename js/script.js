@@ -52,9 +52,9 @@ async function getPage(name) {
 
 // 1. Definimos rutas. Las dinámicas usan ":param" como placeholder.
 const routes = [
-    {path: '/', render: () => {return getPage("pages/main.html")}},
-    {path: '/Nosotros', render: () => {return getPage("pages/about.html")}},
-    {path: '/Carta', render: () => {return getPage("pages/menu.html")}},
+    {path: '/', render: () => {return getPage("./pages/main.html")}},
+    {path: '/Nosotros', render: () => {return getPage("./pages/about.html")}},
+    {path: '/Carta', render: () => {return getPage("./pages/menu.html")}},
 ];
 
 const notFound = () => `<h1>404</h1><p>Esa ruta no existe.</p>`;
