@@ -175,9 +175,9 @@ async function render() {
     document.querySelectorAll('nav a[data-route]').forEach(link => {
         const linkPath = link.getAttribute('href');
         console.log(">>",linkPath, path)
-        const isActive = linkPath === path || 
-                        (path === '/' && linkPath === '/') ||
-                        (path.endsWith('.html') && linkPath === path.replace('.html', ''));
+        const isActive = (path === '/' && linkPath === '/') || 
+                          (path != '/' && linkPath != '/' && path.includes(linkPath)) ||
+                          (path.endsWith('.html') && linkPath === path.replace('.html', ''));
         link.classList.toggle('border-sky-700', isActive);
     });
 }
