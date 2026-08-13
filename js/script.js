@@ -92,7 +92,7 @@ async function render() {
 // 3. Navegación programática: cambia la URL sin recargar
 function navigate(path) {
     console.log("navigate",pageHref+path)
-    history.pushState(null, '', pageHref.substring(0,pageHref.length-1)+path);
+    history.pushState(null, '', pageHref.substring(0,pageHref.length-2)+path);
     render();
 }
 
