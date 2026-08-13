@@ -35,7 +35,7 @@ function sideMenu(openBtnID, closeBtnID, menuContainerID, overlayID, side) {
     })
 }
 //   SPA
-
+const pageHref = ""
 async function getPage(name) {
   try {
     const respuesta = await fetch(name);
@@ -91,7 +91,7 @@ async function render() {
 
 // 3. Navegación programática: cambia la URL sin recargar
 function navigate(path) {
-    history.pushState(null, '', path);
+    history.pushState(null, '', pageHref+path);
     render();
 }
 
@@ -111,6 +111,7 @@ window.addEventListener('DOMContentLoaded', render);
 
 document.addEventListener("DOMContentLoaded", () => {
     sideMenu("sideMenuOpenBtn", "sideMenuCloseBtn", "sideMenuContainer", "sideMenuOverlay", "right")
+    pageHref = location.href
     render()
     console.log(routes)
 })
