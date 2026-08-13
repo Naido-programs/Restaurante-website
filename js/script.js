@@ -1,5 +1,3 @@
-const rutaBase = null
-
 function sideMenu(openBtnID, closeBtnID, menuContainerID, overlayID, side) {
     let openBtn = document.getElementById(openBtnID)
     let closeBtn = document.getElementById(closeBtnID)
@@ -54,9 +52,9 @@ async function getPage(name) {
 
 // 1. Definimos rutas. Las dinámicas usan ":param" como placeholder.
 const routes = [
-    {path: '/', render: () => {return getPage(rutaBase+"/pages/main.html")}},
-    {path: '/Nosotros', render: () => {return getPage(rutaBase+"/pages/about.html")}},
-    {path: '/Carta', render: () => {return getPage(rutaBase+"/pages/menu.html")}},
+    {path: '/', render: () => {return getPage(location.href+"/pages/main.html")}},
+    {path: '/Nosotros', render: () => {return getPage(location.href+"/pages/about.html")}},
+    {path: '/Carta', render: () => {return getPage(location.href+"/pages/menu.html")}},
 ];
 
 const notFound = () => `<h1>404</h1><p>Esa ruta no existe.</p>`;
@@ -112,7 +110,6 @@ window.addEventListener('DOMContentLoaded', render);
 
 document.addEventListener("DOMContentLoaded", () => {
     sideMenu("sideMenuOpenBtn", "sideMenuCloseBtn", "sideMenuContainer", "sideMenuOverlay", "right")
-    rutaBase = location.href
     render()
     console.log(routes)
 })
