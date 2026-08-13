@@ -54,7 +54,7 @@ function getBasePath() {
 }
 
 const BASE_PATH = getBasePath();
-console.log('Base Path:', BASE_PATH || 'Raíz del dominio');
+//console.log('Base Path:', BASE_PATH || 'Raíz del dominio');
 
 // ============================================
 // 3. CARGA DE PÁGINAS (con rutas relativas)
@@ -65,13 +65,13 @@ async function getPage(name) {
         const url = name.startsWith('/') ? name : '/' + name;
         const fullUrl = BASE_PATH + url;
         
-        console.log('Cargando:', fullUrl);
+        //console.log('Cargando:', fullUrl);
         const respuesta = await fetch(fullUrl);
         
         if (!respuesta.ok) throw new Error('No se pudo cargar el archivo');
         return await respuesta.text();
     } catch (error) {
-        console.error('Error:', error);
+        //console.error('Error:', error);
         return `<h1>404</h1><p>No se pudo cargar la página: ${name}</p>`;
     }
 }
@@ -86,12 +86,12 @@ const routes = [
         render: () => getPage('pages/main.html') 
     },
     { 
-        path: '/Nosotros', 
-        render: () => getPage('pages/about.html') 
+        path: '/nosotros', 
+        render: () => getPage('pages/nosotros.html') 
     },
     { 
-        path: '/Carta', 
-        render: () => getPage('pages/menu.html') 
+        path: '/carta', 
+        render: () => getPage('pages/carta.html') 
     },
     // ✅ Ruta para GitHub Pages (cuando entran directamente)
     { 
@@ -100,12 +100,12 @@ const routes = [
     },
     // ✅ Ruta para páginas con extensión .html (enlaces directos)
     { 
-        path: '/Nosotros.html', 
-        render: () => getPage('pages/about.html') 
+        path: '/nosotros.html', 
+        render: () => getPage('pages/nosotros.html') 
     },
     { 
-        path: '/Carta.html', 
-        render: () => getPage('pages/menu.html') 
+        path: '/carta.html', 
+        render: () => getPage('pages/carta.html') 
     },
 ];
 
@@ -130,7 +130,7 @@ function matchRoute(path) {
         if (routePath === '') routePath = '/';
     }
     
-    console.log('Buscando ruta para:', routePath);
+    //console.log('Buscando ruta para:', routePath);
     
     for (const route of routes) {
         const paramNames = [];
@@ -174,6 +174,7 @@ async function render() {
     // ✅ Actualizar clase activa en los enlaces
     document.querySelectorAll('nav a[data-route]').forEach(link => {
         const linkPath = link.getAttribute('href');
+        console.log(">>",linkPath, path)
         const isActive = linkPath === path || 
                         (path === '/' && linkPath === '/') ||
                         (path.endsWith('.html') && linkPath === path.replace('.html', ''));
@@ -187,7 +188,7 @@ async function render() {
 function navigate(path) {
     // ✅ Si hay base path, agregarlo
     const fullPath = BASE_PATH + path;
-    console.log('Navegando a:', fullPath);
+    //console.log('Navegando a:', fullPath);
     history.pushState(null, '', fullPath);
     render();
 }
@@ -225,6 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // ✅ Renderizar la página inicial
     render();
     
-    console.log('🚀 SPA Iniciada con Base Path:', BASE_PATH || 'Raíz');
-    console.log('📄 Rutas disponibles:', routes.map(r => r.path));
+    //console.log('🚀 SPA Iniciada con Base Path:', BASE_PATH || 'Raíz');
+    //console.log('📄 Rutas disponibles:', routes.map(r => r.path));
 });
