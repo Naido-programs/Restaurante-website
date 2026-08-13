@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante Website</title>
+
+    <link rel="shortcut icon" href="images/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
+        integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="css/output.css">
+    <!-- <script src="tailwind-3.4.17.js"></script> -->
+    <script defer src="js/script.js"></script>
+
+    <!-- <script>
+        /** @type {import('tailwindcss').Config} */
+        module.exports = {
+            content: ["./**/*.php", "./**/*.html", "./js/**/*.js"],
+            theme: {
+                extend: {},
+            },
+            plugins: [],
+        }
+    </script> -->
+</head>
+
+<body class="bg-sky-100">
+
+    <!-- HEADER -->
+    <header
+        class="sticky left-0 top-0 z-50 flex flex-row w-full h-20 justify-around items-center bg-white shadow-lg shadow-black/20">
+        <a class="flex flex-row w-fit h-full gap-3 items-center" href="">
+            <img class="object-contain self-start w-full h-full p-1" src="images/logo.webp" alt="">
+            <h1 class="hidden sm:block font-bold text-3xl text-nowrap text-sky-800">Mi restaurante</h1>
+        </a>
+
+        <nav class="flex flex-row w-fit h-full px-5 py-4 text-sky-900">
+            <div class="hidden sm:flex flex-row gap-5">
+                <a class="min-w-20 text-center px-3 h-full place-content-center border-b-2 hover:text-sky-600 border-sky-700"
+                    href="/" data-route="/">Inicio</a>
+                <a class="min-w-20 text-center px-3 h-full place-content-center border-b-2 hover:text-sky-600 border-sky-700"
+                    href="/Carta" data-route="/Carta">Carta</a>
+                <a class="min-w-20 text-center px-3 h-full place-content-center border-b-2 hover:text-sky-600 border-sky-700"
+                    href="/Nosotros" data-route="/Nosotros">Sobre Nosotros</a>
+            </div>
+            <button id="sideMenuOpenBtn" class="sm:hidden"><i class="fa-solid fa-bars fa-2xl"></i></button>
+        </nav>
+
+        <!-- side menu -->
+        <div id="sideMenuOverlay"
+            class="absolute top-0 left-0 opacity-0 pointer-events-none w-full h-svh bg-black/50 transition-opacity duration-300 ease-in-out">
+        </div>
+        <nav id="sideMenuContainer"
+            class="absolute top-0 right-0 z-50 hidden flex-col w-2/3 h-svh items-left gap-5 px-5 py-4 text-sky-900 bg-white translate-x-full transition-all duration-500 ease-in-out">
+            <div class="flex flex-row items-center p-2 justify-between">
+                <h2 class="font-semibold">MENÚ</h2>
+                <button id="sideMenuCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <a class="min-w-20 px-3 h-fit border-b-2 border-sky-900" href="/" data-route="/">Inicio</a>
+            <a class="min-w-20 px-3 h-fit border-b-2 border-sky-900" href="/menu" data-route="/menu">Carta</a>
+            <a class="min-w-20 px-3 h-fit border-b-2 border-sky-900" href="/about" data-route="/about">Sobre
+                Nosotros</a>
+        </nav>
+    </header>
+
+
+    <main id="app" class="flex flex-col gap-5">
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+    <footer class="flex flex-col gap-5 pt-20 pb-5 px-10 border-t-2 text-slate-50 bg-sky-600">
+        <section class="grid grid-cols-1 lg:grid-cols-5 items-center gap-5">
+            <div class="flex flex-row max-h-96">
+                <img class="object-contain" src="images/logo.webp" alt="">
+            </div>
+            <div class="flex flex-col h-full gap-5">
+                <h2 class="uppercase font-bold text-lg border-b-2 border-slate-50">horario</h2>
+                <div class="flex flex-col">
+                    <p>De miércoles a Domingo</p>
+                    <span>12:00. - 22:30h.</span>
+                </div>
+                <div class="flex flex-col">
+                    <p>Lunes y martes</p>
+                    <span>CERRADO</span>
+                </div>
+            </div>
+            <div class="flex flex-col h-full gap-5">
+                <h2 class="uppercase font-bold text-lg border-b-2 border-slate-50">dirección</h2>
+                <p>Calle ficticia, 38650 Ciudad.., Pais..</p>
+            </div>
+            <div class="flex flex-col h-full gap-5">
+                <h2 class="uppercase font-bold text-lg border-b-2 border-slate-50">teléfono</h2>
+                <span>+99 123 123 123</span>
+            </div>
+            <div class="flex flex-col h-full gap-5">
+                <h2 class="uppercase font-bold text-lg border-b-2 border-slate-50">redes sociales</h2>
+                <div class="flex flex-row">
+                    <a href=""><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
+                    <a href=""><i class="fa-brands fa-facebook fa-2xl"></i></a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="flex flex-col text-center gap-3">
+            <div>
+                <span>NaidoPrograms © Todos los derechos reservados 2026.</span>
+            </div>
+            <div>
+                <a href="">Política de Privacidad.</a>
+                <a href="">Política de Cookies.</a>
+            </div>
+        </section>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>SPA sin librerías</title>
+<style>
+  :root {
+    --bg: #1a1a1a;
+    --panel: #242424;
+    --accent: #5eead4;
+    --text: #e6e6e6;
+    --muted: #999;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  nav {
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+    background: var(--panel);
+    border-bottom: 1px solid #333;
+  }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: background 0.15s, color 0.15s;
+  }
+  nav a:hover { background: #333; color: var(--text); }
+  nav a.active { color: var(--bg); background: var(--accent); font-weight: 600; }
+  main {
+    max-width: 640px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  h1 { font-size: 24px; margin-bottom: 8px; }
+  p { color: var(--muted); line-height: 1.6; }
+  .card {
+    background: var(--panel);
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 16px;
+  }
+  button {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#/" data-route="/">Inicio</a>
+  <a href="#/about" data-route="/about">Acerca</a>
+  <a href="#/contador" data-route="/contador">Contador</a>
+</nav>
+
+<main id="app"></main>
+
+<script>
+  // 1. Definimos las "páginas" como funciones que devuelven HTML
+  const routes = {
+    '/': () => `
+      <h1>Inicio</h1>
+      <p>Esta es una SPA hecha solo con JavaScript. Al hacer click en los
+      enlaces de arriba, el contenido cambia sin recargar la página y la URL
+      se actualiza (mirá la barra de direcciones).</p>
+    `,
+    '/about': () => `
+      <h1>Acerca de</h1>
+      <p>El router escucha el evento <code>hashchange</code> y decide qué
+      función de render ejecutar según el hash actual (todo lo que va
+      después del <code>#</code>).</p>
+    `,
+    '/contador': () => `
+      <h1>Contador</h1>
+      <div class="card">
+        <p id="count-label">Valor: 0</p>
+        <button id="btn-sum">Sumar</button>
+      </div>
+    `,
+    '404': () => `<h1>404</h1><p>Esa ruta no existe.</p>`
+  };
+
+  // 2. Lógica que se ejecuta DESPUÉS de pintar cada ruta (opcional)
+  const afterRender = {
+    '/contador': () => {
+      let count = 0;
+      const label = document.getElementById('count-label');
+      document.getElementById('btn-sum').addEventListener('click', () => {
+        count++;
+        label.textContent = `Valor: ${count}`;
+      });
+    }
+  };
+
+  const app = document.getElementById('app');
+  const links = document.querySelectorAll('#nav a');
+
+  function render() {
+    // Tomamos el hash actual, ej: "#/about" -> "/about"
+    const path = location.hash.slice(1) || '/';
+    const page = routes[path] || routes['404'];
+
+    app.innerHTML = page();
+
+    // Ejecutamos lógica extra si esta ruta la necesita
+    if (afterRender[path]) afterRender[path]();
+
+    // Marcamos el link activo
+    links.forEach(link => {
+      link.classList.toggle('active', link.dataset.route === path);
+    });
+  }
+
+  // 3. Escuchamos cambios de hash y la carga inicial
+  window.addEventListener('hashchange', render);
+  window.addEventListener('DOMContentLoaded', render);
+</script>
+
+</body>
+</html>
