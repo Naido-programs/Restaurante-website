@@ -35,7 +35,7 @@ function sideMenu(openBtnID, closeBtnID, menuContainerID, overlayID, side) {
     })
 }
 //   SPA
-const pageHref = ""
+let pageHref = ""
 async function getPage(name) {
   try {
     const respuesta = await fetch(name);
